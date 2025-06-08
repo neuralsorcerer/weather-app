@@ -9,11 +9,11 @@ import {
   rain,
   snow,
 } from "@/app/utils/Icons";
-import { kelvinToCelsius } from "@/app/utils/misc";
+import { formatTemp } from "@/app/utils/misc";
 import moment from "moment";
 
 function Temperature() {
-  const { forecast } = useGlobalContext();
+  const { forecast, unit } = useGlobalContext();
 
   const { main, timezone, name, weather } = forecast;
 
@@ -21,9 +21,9 @@ function Temperature() {
     return <div>Loading...</div>;
   }
 
-  const temp = kelvinToCelsius(main?.temp);
-  const minTemp = kelvinToCelsius(main?.temp_min);
-  const maxTemp = kelvinToCelsius(main?.temp_max);
+  const temp = formatTemp(main?.temp, unit);
+  const minTemp = formatTemp(main?.temp_min, unit);
+  const maxTemp = formatTemp(main?.temp_max, unit);
 
   // State
   const [localTime, setLocalTime] = useState<string>("");
@@ -79,7 +79,9 @@ function Temperature() {
         <span>{name}</span>
         <span>{navigation}</span>
       </p>
-      <p className="py-10 text-9xl font-bold self-center">{temp}°</p>
+      <p className="py-10 text-9xl font-bold self-center">
+        {temp}°{unit.toUpperCase()}
+      </p>
 
       <div>
         <div>
@@ -87,8 +89,12 @@ function Temperature() {
           <p className="pt-2 capitalize text-lg font-medium">{description}</p>
         </div>
         <p className="flex items-center gap-2">
-          <span>Low: {minTemp}°</span>
-          <span>High: {maxTemp}°</span>
+          <span>
+            Low: {minTemp}°{unit.toUpperCase()}
+          </span>
+          <span>
+            High: {maxTemp}°{unit.toUpperCase()}
+          </span>
         </p>
       </div>
     </div>

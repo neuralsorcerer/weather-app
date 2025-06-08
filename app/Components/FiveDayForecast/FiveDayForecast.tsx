@@ -1,12 +1,12 @@
 "use client";
 import { useGlobalContext } from "@/app/context/globalContext";
 import { calender } from "@/app/utils/Icons";
-import { kelvinToCelsius, unixToDay } from "@/app/utils/misc";
+import { formatTemp, unixToDay } from "@/app/utils/misc";
 import { Skeleton } from "@/components/ui/skeleton";
 import React from "react";
 
 function FiveDayForecast() {
-  const { fiveDayForecast } = useGlobalContext();
+  const { fiveDayForecast, unit } = useGlobalContext();
 
   const { city, list } = fiveDayForecast;
 
@@ -36,8 +36,8 @@ function FiveDayForecast() {
 
     return {
       day: unixToDay(dailyData[0].dt),
-      minTemp: kelvinToCelsius(minTemp),
-      maxTemp: kelvinToCelsius(maxTemp),
+      minTemp: formatTemp(minTemp, unit),
+      maxTemp: formatTemp(maxTemp, unit),
     };
   };
 
@@ -72,9 +72,13 @@ function FiveDayForecast() {
                 </p>
 
                 <div className="flex-1 flex items-center justify-between gap-4">
-                  <p className="font-bold">{day.minTemp}°C</p>
+                  <p className="font-bold">
+                    {day.minTemp}°{unit.toUpperCase()}
+                  </p>
                   <div className="temperature flex-1 w-full h-2 rounded-lg"></div>
-                  <p className="font-bold">{day.maxTemp}°C</p>
+                  <p className="font-bold">
+                    {day.maxTemp}°{unit.toUpperCase()}
+                  </p>
                 </div>
               </div>
             );

@@ -15,6 +15,8 @@ export const GlobalContextProvider = ({ children }) => {
 
   const [activeCityCoords, setActiveCityCoords] = useState([22.6858, 88.3361]);
 
+  const [unit, setUnit] = useState("c");
+
   useEffect(() => {
     const saved = localStorage.getItem("activeCityCoords");
     if (saved) {
@@ -32,6 +34,17 @@ export const GlobalContextProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("activeCityCoords", JSON.stringify(activeCityCoords));
   }, [activeCityCoords]);
+
+  useEffect(() => {
+    const savedUnit = localStorage.getItem("unit");
+    if (savedUnit === "c" || savedUnit === "f") {
+      setUnit(savedUnit);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("unit", unit);
+  }, [unit]);
 
   const [airQuality, setAirQuality] = useState({});
   const [fiveDayForecast, setFiveDayForecast] = useState({});
@@ -131,11 +144,13 @@ export const GlobalContextProvider = ({ children }) => {
         inputValue,
         handleInput,
         setActiveCityCoords,
+        unit,
       }}
     >
       <GlobalContextUpdate.Provider
         value={{
           setActiveCityCoords,
+          setUnit,
         }}
       >
         {children}

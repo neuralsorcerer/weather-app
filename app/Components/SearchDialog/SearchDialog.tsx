@@ -7,16 +7,16 @@ import { commandIcon } from "@/app/utils/Icons";
 import { Button } from "@/components/ui/button";
 import { Command, CommandInput } from "@/components/ui/command";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function SearchDialog() {
   const { geoCodedList, inputValue, handleInput } = useGlobalContext();
   const { setActiveCityCoords } = useGlobalContextUpdate();
 
-  const [hoveredIndex, setHoveredIndex] = React.useState<number>(0);
-  const [open, setOpen] = React.useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number>(0);
+  const [open, setOpen] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (
         e.key.toLowerCase() === "f" &&

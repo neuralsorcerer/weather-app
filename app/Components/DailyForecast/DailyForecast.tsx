@@ -9,10 +9,10 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import moment from "moment";
-import { kelvinToCelsius } from "@/app/utils/misc";
+import { formatTemp } from "@/app/utils/misc";
 
 function DailyForecast() {
-  const { forecast, fiveDayForecast } = useGlobalContext();
+  const { forecast, fiveDayForecast, unit } = useGlobalContext();
 
   const { weather } = forecast;
   const { city, list } = fiveDayForecast;
@@ -88,7 +88,8 @@ function DailyForecast() {
                         </p>
                         <p>{getIcon()}</p>
                         <p className="mt-4">
-                          {kelvinToCelsius(forecast.main.temp)}°C
+                          {formatTemp(forecast.main.temp, unit)}°
+                          {unit.toUpperCase()}
                         </p>
                       </CarouselItem>
                     );
