@@ -20,6 +20,7 @@ import {
   SunDim,
   LocateFixed,
   Loader2,
+  RefreshCw,
 } from "lucide-react";
 
 export const commandIcon = <Command size={14} />;
@@ -43,3 +44,4 @@ export const calender = <CalendarDays size={15} />;
 export const sun = <SunDim size={15} />;
 export const locationIcon = <LocateFixed size={15} />;
 export const spinnerIcon = <Loader2 size={15} className="animate-spin" />;
+export const refreshIcon = <RefreshCw size={15} />;

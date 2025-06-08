@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+
 import AirPollution from "./Components/AirPollution/AirPollution";
 import DailyForecast from "./Components/DailyForecast/DailyForecast";
 import FeelsLike from "./Components/FeelsLike/FeelsLike";
@@ -83,7 +83,7 @@ export default function Home() {
       <footer className="py-4 flex justify-center pb-8">
         <p className="footer-text text-sm flex items-center gap-1">
           Made with ❤️ by{" "}
-          <a href="https://soumyadipsarkar.in" className=" font-bold">
+          <a href="https://soumyadipsarkar.com" className=" font-bold">
             Soumyadip Sarkar
           </a>
         </p>

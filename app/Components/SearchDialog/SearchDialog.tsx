@@ -27,6 +27,10 @@ function SearchDialog() {
         e.preventDefault();
         setOpen(true);
       }
+
+      if (e.key === "Escape") {
+        setOpen(false);
+      }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
@@ -62,8 +66,9 @@ function SearchDialog() {
             <ul className="px-3 pb-2">
               <p className="p-2 text-sm text-muted-foreground">Suggestions</p>
 
-              {geoCodedList?.length === 0 ||
-                (!geoCodedList && <p>No Results</p>)}
+              {(geoCodedList?.length ?? 0) === 0 && (
+                <p className="px-2">No Results</p>
+              )}
 
               {geoCodedList &&
                 geoCodedList.map(

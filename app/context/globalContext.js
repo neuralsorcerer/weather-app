@@ -1,4 +1,4 @@
-"use Client";
+"use client";
 import axios from "axios";
 import React, { useContext, createContext, useState, useEffect } from "react";
 import defaultStates from "../utils/defaultStates";
@@ -48,7 +48,7 @@ export const GlobalContextProvider = ({ children }) => {
 
   const [airQuality, setAirQuality] = useState({});
   const [fiveDayForecast, setFiveDayForecast] = useState({});
-  const [uvIndex, seUvIndex] = useState({});
+  const [uvIndex, setUvIndex] = useState({});
 
   const fetchForecast = async (lat, lon) => {
     try {
@@ -97,10 +97,17 @@ export const GlobalContextProvider = ({ children }) => {
     try {
       const res = await axios.get(`/api/uv?lat=${lat}&lon=${lon}`);
 
-      seUvIndex(res.data);
+      setUvIndex(res.data);
     } catch (error) {
       console.error("Error fetching the forecast:", error);
     }
+  };
+
+  const refreshData = () => {
+    fetchForecast(activeCityCoords[0], activeCityCoords[1]);
+    fetchAirQuality(activeCityCoords[0], activeCityCoords[1]);
+    fetchFiveDayForecast(activeCityCoords[0], activeCityCoords[1]);
+    fetchUvIndex(activeCityCoords[0], activeCityCoords[1]);
   };
 
   // handle input
@@ -127,10 +134,12 @@ export const GlobalContextProvider = ({ children }) => {
   }, [inputValue]);
 
   useEffect(() => {
-    fetchForecast(activeCityCoords[0], activeCityCoords[1]);
-    fetchAirQuality(activeCityCoords[0], activeCityCoords[1]);
-    fetchFiveDayForecast(activeCityCoords[0], activeCityCoords[1]);
-    fetchUvIndex(activeCityCoords[0], activeCityCoords[1]);
+    refreshData();
+  }, [activeCityCoords]);
+
+  useEffect(() => {
+    const id = setInterval(refreshData, 30 * 60 * 1000);
+    return () => clearInterval(id);
   }, [activeCityCoords]);
 
   return (
@@ -151,6 +160,7 @@ export const GlobalContextProvider = ({ children }) => {
         value={{
           setActiveCityCoords,
           setUnit,
+          refreshData,
         }}
       >
         {children}

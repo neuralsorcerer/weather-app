@@ -4,6 +4,7 @@ import ThemeDropdown from "./ThemeDropdown/ThemeDropdown";
 import SearchDialog from "./SearchDialog/SearchDialog";
 import CurrentLocationButton from "./CurrentLocationButton";
 import UnitToggle from "./UnitToggle";
+import RefreshButton from "./RefreshButton";
 
 function Navbar() {
   return (
@@ -15,6 +16,7 @@ function Navbar() {
         <SearchDialog />
 
         <div className="btn-group flex items-center gap-2">
+          <RefreshButton />
           <UnitToggle />
           <ThemeDropdown />
         </div>
