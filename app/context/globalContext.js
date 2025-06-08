@@ -15,6 +15,24 @@ export const GlobalContextProvider = ({ children }) => {
 
   const [activeCityCoords, setActiveCityCoords] = useState([22.6858, 88.3361]);
 
+  useEffect(() => {
+    const saved = localStorage.getItem("activeCityCoords");
+    if (saved) {
+      try {
+        const coords = JSON.parse(saved);
+        if (Array.isArray(coords) && coords.length === 2) {
+          setActiveCityCoords(coords);
+        }
+      } catch {
+        /* ignore */
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("activeCityCoords", JSON.stringify(activeCityCoords));
+  }, [activeCityCoords]);
+
   const [airQuality, setAirQuality] = useState({});
   const [fiveDayForecast, setFiveDayForecast] = useState({});
   const [uvIndex, seUvIndex] = useState({});

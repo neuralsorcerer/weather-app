@@ -14,13 +14,31 @@ function SearchDialog() {
   const { setActiveCityCoords } = useGlobalContextUpdate();
 
   const [hoveredIndex, setHoveredIndex] = React.useState<number>(0);
+  const [open, setOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (
+        e.key.toLowerCase() === "f" &&
+        !e.metaKey &&
+        !e.ctrlKey &&
+        !e.altKey
+      ) {
+        e.preventDefault();
+        setOpen(true);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const getClickedCoords = (lat: number, lon: number) => {
     setActiveCityCoords([lat, lon]);
+    setOpen(false);
   };
   return (
     <div className="search-btn">
-      <Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button
             variant="outline"
