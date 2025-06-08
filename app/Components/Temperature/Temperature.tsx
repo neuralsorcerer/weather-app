@@ -79,7 +79,7 @@ function Temperature() {
         <span>{name}</span>
         <span>{navigation}</span>
       </p>
-      <p className="py-10 text-9xl font-bold self-center">
+      <p className="py-10 text-7xl sm:text-8xl md:text-9xl font-bold self-center">
         {temp}°{unit.toUpperCase()}
       </p>
 

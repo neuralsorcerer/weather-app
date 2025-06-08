@@ -134,11 +134,12 @@ footer:hover .footer-text > img {
   }
 
   .search-btn {
-    width: 100%;
+    width: auto;
   }
 
   .search-btn button {
-    width: 100%;
+    width: auto;
+    max-width: 100%;
   }
 
   .source-code-btn {

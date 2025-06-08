@@ -7,12 +7,14 @@ import {
   Snowflake,
   CloudSun,
   Cloudy,
+  Cloud,
   Navigation,
   ThermometerSun,
   Sunset,
   Wind,
   Gauge,
   Droplets,
+  Droplet,
   Thermometer,
   Eye,
   UsersRound,
@@ -37,6 +39,8 @@ export const sunset = <Sunset size={15} />;
 export const wind = <Wind size={15} />;
 export const gauge = <Gauge size={15} />;
 export const droplets = <Droplets size={15} />;
+export const droplet = <Droplet size={15} />;
+export const cloud = <Cloud size={15} />;
 export const thermometer = <Thermometer size={15} />;
 export const eye = <Eye size={15} />;
 export const people = <UsersRound size={15} />;
