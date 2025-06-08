@@ -12,6 +12,7 @@ import Temperature from "./Components/Temperature/Temperature";
 import UvIndex from "./Components/UvIndex/UvIndex";
 import Visibility from "./Components/Visibility/Visibility";
 import Wind from "./Components/Wind/Wind";
+import Precipitation from "./Components/Precipitation/Precipitation";
 import defaultStates from "./utils/defaultStates";
 import FiveDayForecast from "./Components/FiveDayForecast/FiveDayForecast";
 import { useGlobalContextUpdate } from "./context/globalContext";
@@ -52,6 +53,7 @@ export default function Home() {
             <FeelsLike />
             <Humidity />
             <Visibility />
+            <Precipitation />
             <Pressure />
           </div>
           <div className="mapbox-con mt-4 flex gap-4">
